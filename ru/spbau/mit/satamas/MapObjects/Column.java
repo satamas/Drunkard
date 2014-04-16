@@ -1,10 +1,18 @@
 package ru.spbau.mit.satamas.MapObjects;
 
-public class Column implements MapObject {
-	public void nextStep(){
+import ru.spbau.mit.satamas.Field;
+
+public class Column extends MapObject {
+    public Column(Field field) {
+        super(field);
+    }
+
+    @Override
+    public char repr() {
+        return 'C';
+    }
+
+    public void nextStep(){
 	}
-	
-	public void print(){
-		System.out.print("C");
-	}
+
 }

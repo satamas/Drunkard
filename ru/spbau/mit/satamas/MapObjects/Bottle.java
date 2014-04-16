@@ -1,13 +1,19 @@
 package ru.spbau.mit.satamas.MapObjects;
 
-public class Bottle implements MapObject {
+import ru.spbau.mit.satamas.Field;
 
-	@Override
-	public void print() {
-		System.out.print("B");
-	}
+public class Bottle extends MapObject {
 
-	@Override
+    Bottle(Field field) {
+        super(field);
+    }
+
+    @Override
+    public char repr() {
+        return 'B';
+    }
+
+    @Override
 	public void nextStep() {
 		// TODO Auto-generated method stub
 		

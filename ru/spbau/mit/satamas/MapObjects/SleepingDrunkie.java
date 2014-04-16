@@ -1,10 +1,18 @@
 package ru.spbau.mit.satamas.MapObjects;
 
-public class SleepingDrunkie implements MapObject {
-	public void nextStep(){
+import ru.spbau.mit.satamas.Field;
+
+public class SleepingDrunkie extends MapObject {
+    SleepingDrunkie(Field field) {
+        super(field);
+    }
+
+    public void nextStep(){
 	}
-	
-	public void print(){
-		System.out.print("Z");
-	}
+
+    @Override
+    public char repr() {
+        return 'Z';
+    }
+
 }
