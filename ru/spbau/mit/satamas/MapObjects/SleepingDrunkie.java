@@ -2,7 +2,7 @@ package ru.spbau.mit.satamas.MapObjects;
 
 import ru.spbau.mit.satamas.Field;
 
-public class SleepingDrunkie extends MapObject {
+public class SleepingDrunkie extends ActiveObject {
     SleepingDrunkie(Field field) {
         super(field);
     }

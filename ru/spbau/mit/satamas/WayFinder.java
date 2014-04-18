@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class WayFinder {
 
-    public static Field findWay(Field pos, Class destination, boolean onlyWisible){
+    public static Field findWay(Field pos, Class destination, boolean onlyVisible) {
         List<Field> bfsList = new ArrayList<Field>();
 
         List<Boolean> visited = new ArrayList<Boolean>();
@@ -32,7 +32,7 @@ public class WayFinder {
 
             if (f.getObj() != null) {
                 if (destination.isInstance(f.getObj())) {
-                    if( !onlyWisible || f.isBright() ) {
+                    if (!onlyVisible || f.isBright()) {
                         break;
                     } else {
                         ++bfsIndex;

@@ -7,7 +7,7 @@ import ru.spbau.mit.satamas.WayFinder;
 /**
  * Created by atamas on 15.04.14.
  */
-public class Policeman extends MapObject {
+public class Policeman extends MovableObject {
     private boolean hasDrunkard = false;
 
     Policeman(Field field) {
@@ -34,15 +34,11 @@ public class Policeman extends MapObject {
                 hasDrunkard = true;
             }
 
-            field.delObject();
-            field = step;
-            field.setObject(this);
+            moveTo(step);
         } else {
             Field step = WayFinder.findWay(field, PoliceStation.class, false);
             if (step.getObj() == null) {
-                field.delObject();
-                field = step;
-                field.setObject(this);
+                moveTo(step);
             } else if (step.getObj() instanceof PoliceStation) {
                 ((PoliceStation) step.getObj()).hasPoliceman = true;
                 Map.killObj(this);

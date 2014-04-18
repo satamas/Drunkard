@@ -3,19 +3,20 @@ package ru.spbau.mit.satamas;
 import ru.spbau.mit.satamas.MapObjects.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Map {
 	private static int SIZE_X = 15;
-	private static int SIZE_Y = 15;
     private static int REPR_SIZE_X = SIZE_X + 2;
+    private static int SIZE_Y = 15;
     private static int REPR_SIZE_Y = SIZE_Y + 2;
 
     private static char[][] mapRepr = new char[REPR_SIZE_X][REPR_SIZE_Y];
     private static Field entryPoint;
-    private static ArrayList<MapObject> activeObjects = new ArrayList<MapObject>();
-    private static ArrayList<MapObject> newObjects = new ArrayList<MapObject>();
-    private static ArrayList<MapObject> garbage = new ArrayList<MapObject>();
+    private static List<ActiveObject> activeObjects = new ArrayList<ActiveObject>();
+    private static List<ActiveObject> newObjects = new ArrayList<ActiveObject>();
+    private static List<MapObject> garbage = new ArrayList<MapObject>();
 
     public static void init() {
         Field[] map = new Field[SIZE_X * SIZE_Y];
@@ -45,32 +46,31 @@ public class Map {
 
         Field pointForGlassField = new Field();
         pointForGlassField.setRightNeighbour(map[0 + SIZE_X * 4]);
-        new PointForGlass(pointForGlassField);
         map[0 + SIZE_X * 4].setLeftNeighbour(pointForGlassField);
-        activeObjects.add(pointForGlassField.getObj());
+        activeObjects.add(new PointForGlass(pointForGlassField));
+
 
         Field policeStationField = new Field();
         policeStationField.setLeftNeighbour(map[14 + SIZE_X * 3]);
-        new PoliceStation(policeStationField);
         map[14 + SIZE_X * 3].setRightNeighbour(policeStationField);
-        activeObjects.add(policeStationField.getObj());
+        activeObjects.add(new PoliceStation(policeStationField));
+
 
         Field innField = new Field();
         innField.setLowerNeighbour(map[9 + SIZE_X * 0]);
-        new Inn(innField);
         map[9 + SIZE_X * 0].setUpperNeighbour(innField);
-        activeObjects.add(innField.getObj());
+        activeObjects.add(new Inn(innField));
+
+
         entryPoint = innField;
     }
 
     public static void step() {
-        for (MapObject obj : activeObjects) {
+        for (ActiveObject obj : activeObjects) {
             obj.nextStep();
         }
 
-        for (MapObject obj : garbage) {
-            activeObjects.remove(obj);
-        }
+        activeObjects.removeAll(garbage);
         garbage.clear();
 
         activeObjects.addAll(newObjects);
@@ -108,8 +108,8 @@ public class Map {
 
     public static void print() {
         updateRepr(entryPoint, 10, 0, new boolean[size()]);
-        for (int j = 0; j <= SIZE_Y +1; ++j) {
-            for (int i = 0; i <= SIZE_X +1; ++i) {
+        for (int j = 0; j < REPR_SIZE_Y; ++j) {
+            for (int i = 0; i < REPR_SIZE_X; ++i) {
                 System.out.print(mapRepr[i][j]);
             }
             System.out.println();
@@ -120,7 +120,7 @@ public class Map {
         return SIZE_X * SIZE_Y + 3;
     }
 
-    public static void addActiveObject(MapObject obj) {
+    public static void addActiveObject(ActiveObject obj) {
         newObjects.add(obj);
     }
 

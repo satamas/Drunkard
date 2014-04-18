@@ -5,7 +5,7 @@ import ru.spbau.mit.satamas.Map;
 import java.util.Random;
 
 
-public class Drunkard extends MapObject{
+public class Drunkard extends ActiveObject{
 	Boolean haveBottle = true;
 	
 	public Drunkard(Field field){
@@ -17,6 +17,7 @@ public class Drunkard extends MapObject{
         return 'D';
     }
 
+    @Override
     public void nextStep(){
 		Random rand = new Random();
 		int randInt = rand.nextInt(5);
@@ -36,17 +37,19 @@ public class Drunkard extends MapObject{
 				}
                 destination.setObject(this);
 			} else{
-				if(object instanceof Column || object instanceof SleepingDrunkie){
-					field.delObject();
-					new SleepingDrunkie(field);
-					Map.killObj(this);
-				}
-				if(object instanceof Bottle){
-					field.delObject();
-					new FallenDrunkie(field);
-					Map.killObj(this);						
-				}
-			}
+                if(object instanceof Column || object instanceof SleepingDrunkie){
+                    field.delObject();
+                    new SleepingDrunkie(field);
+                    Map.killObj(this);
+                }
+                if(object instanceof Bottle){
+                    field.delObject();
+                    new FallenDrunkie(field);
+                    Map.killObj(this);
+                }
+            }
+
+
 		}
 		
 	}

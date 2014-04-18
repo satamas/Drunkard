@@ -6,7 +6,7 @@ import ru.spbau.mit.satamas.Map;
 /**
  * Created by atamas on 16.04.14.
  */
-public class PointForGlass  extends MapObject{
+public class PointForGlass  extends ActiveObject{
     public boolean hasBeggar = true;
     public int timer = 0;
 
@@ -33,9 +33,8 @@ public class PointForGlass  extends MapObject{
             if(timer == 0) {
                 Field neighbour = field.getNeighbours().get(1);
                 if(neighbour.getObj() == null) {
-                    new Beggar(neighbour);
                     hasBeggar = false;
-                    Map.addActiveObject(field.getNeighbours().get(1).getObj());
+                    Map.addActiveObject(new Beggar(neighbour));
                 }
             } else{
                 --timer;

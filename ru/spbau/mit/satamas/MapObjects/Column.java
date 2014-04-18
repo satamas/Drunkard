@@ -12,7 +12,4 @@ public class Column extends MapObject {
         return 'C';
     }
 
-    public void nextStep(){
-	}
-
 }

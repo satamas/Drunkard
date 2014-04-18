@@ -28,7 +28,4 @@ public class Light extends MapObject{
         return 'L';
     }
 
-    @Override
-    public void nextStep() {
-    }
 }

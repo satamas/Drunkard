@@ -6,7 +6,7 @@ import ru.spbau.mit.satamas.Map;
 /**
  * Created by atamas on 16.04.14.
  */
-public class Inn extends MapObject{
+public class Inn extends ActiveObject{
     int timer = 0;
 
     public Inn(Field field) {
@@ -23,8 +23,7 @@ public class Inn extends MapObject{
         if(timer == 0) {
             Field neighbour = field.getNeighbours().get(2);
             if(neighbour.getObj() == null) {
-                new Drunkard(neighbour);
-                Map.addActiveObject(field.getNeighbours().get(2).getObj());
+                Map.addActiveObject(new Drunkard(neighbour));
             }
             timer = 20;
         } else{

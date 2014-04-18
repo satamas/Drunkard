@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by atamas on 16.04.14.
  */
-public class Beggar extends MapObject {
+public class Beggar extends ActiveObject {
     public int stepNo = 0;
     boolean hasBottle = false;
     private int[] lastVisit = new int[Map.size()];

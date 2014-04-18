@@ -13,10 +13,5 @@ public class FallenDrunkie extends MapObject{
         return '&';
     }
 
-	@Override
-	public void nextStep() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

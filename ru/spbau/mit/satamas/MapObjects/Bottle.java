@@ -12,11 +12,5 @@ public class Bottle extends MapObject {
     public char repr() {
         return 'B';
     }
-
-    @Override
-	public void nextStep() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
