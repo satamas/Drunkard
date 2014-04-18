@@ -10,11 +10,10 @@ import java.util.List;
 /**
  * Created by atamas on 16.04.14.
  */
-public class Beggar extends ActiveObject {
+public class Beggar extends MovableObject {
     public int stepNo = 0;
     boolean hasBottle = false;
     private int[] lastVisit = new int[Map.size()];
-    int wait = 0;
 
     public Beggar(Field field) {
         super(field);
@@ -28,31 +27,23 @@ public class Beggar extends ActiveObject {
 
     @Override
     public void nextStep() {
-        if(wait!= 0){
-            --wait;
+        if (!hasBottle) {
+            Field step = chooseField();
+
+            if (step.getObj() instanceof Bottle) {
+                step.delObject();
+                hasBottle = true;
+
+            }
+            moveTo(step);
+            ++stepNo;
+            lastVisit[field.fieldNo] = stepNo;
         } else {
-            if (!hasBottle) {
-                Field step = chooseField();
-                if (step.getObj() instanceof Bottle) {
-                    step.delObject();
-                    hasBottle = true;
-                }
-                field.delObject();
-                field = step;
-                field.setObject(this);
-                ++stepNo;
-                lastVisit[field.fieldNo] = stepNo;
-            } else {
-                Field step = WayFinder.findWay(this.field, PointForGlass.class, false);
-                if (step.getObj() == null) {
-                    field.delObject();
-                    field = step;
-                    field.setObject(this);
-                } else if (step.getObj() instanceof PointForGlass) {
-                    ((PointForGlass) step.getObj()).getInto(this);
-                    hasBottle = false;
-                    wait = 30;
-                }
+            Field step = WayFinder.findWay(this.field, PointForGlass.class, false);
+            if (step.getObj() == null) {
+                moveTo(step);
+            } else if (step.getObj() instanceof PointForGlass) {
+                ((PointForGlass) step.getObj()).getInto(this);
             }
         }
     }

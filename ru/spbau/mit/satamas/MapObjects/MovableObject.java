@@ -12,12 +12,14 @@ public abstract class MovableObject extends ActiveObject {
     }
 
     protected void moveTo(Field field){
-        if(!field.isEmpty()){
-            throw new FieldIsNotEmptyException();
-        } else {
-            this.field.delObject();
-            this.field = field;
-            this.field.setObject(this);
+        if(field != this.field) {
+            if (!field.isEmpty()) {
+                throw new FieldIsNotEmptyException();
+            } else {
+                this.field.delObject();
+                this.field = field;
+                this.field.setObject(this);
+            }
         }
     }
 

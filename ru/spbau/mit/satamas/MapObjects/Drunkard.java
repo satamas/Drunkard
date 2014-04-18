@@ -5,7 +5,7 @@ import ru.spbau.mit.satamas.Map;
 import java.util.Random;
 
 
-public class Drunkard extends ActiveObject{
+public class Drunkard extends MovableObject{
 	Boolean haveBottle = true;
 	
 	public Drunkard(Field field){
