@@ -17,7 +17,9 @@ public class Light extends MapObject{
         if (dist <= max_dist) {
             field.setBright(true);
             for (Field f : field.getNeighbours()) {
-                setBrightness(f, dist + 1, max_dist);
+                if( f != null ) {
+                    setBrightness(f, dist + 1, max_dist);
+                }
             }
         }
     }

@@ -4,6 +4,8 @@ import ru.spbau.mit.satamas.MapObjects.MapObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 
 public class Field {
@@ -16,8 +18,8 @@ public class Field {
 
     private MapObject obj;
 
-    public Field() {
-        for (int i = 0; i < 4; ++i) {
+    public Field(int noOfNeighbours) {
+        for (int i = 0; i < noOfNeighbours; ++i) {
             neighbours.add(null);
         }
         fieldNo = fieldCounter;
@@ -46,20 +48,8 @@ public class Field {
         obj.setField(this);
     }
 
-    public void setUpperNeighbour(Field field) {
-        neighbours.set(0, field);
-    }
-
-    public void setRightNeighbour(Field field) {
-        neighbours.set(1, field);
-    }
-
-    public void setLowerNeighbour(Field field) {
-        neighbours.set(2, field);
-    }
-
-    public void setLeftNeighbour(Field field) {
-        neighbours.set(3, field);
+    public void setNeighbour(Field field, int no) {
+        neighbours.set( no, field );
     }
 
     public char repr() {
@@ -93,6 +83,21 @@ public class Field {
 
     public List<Field> getNeighbours() {
         return neighbours;
+    }
+
+    public Field getSingleNeighbour() {
+        for( Field f : neighbours){
+            if( f != null){
+                return f;
+            }
+        }
+        throw new NoSuchElementException("Neighbour do not exist");
+    }
+
+    public Field getRandomNeighbour(){
+        Random rand = new Random();
+        int randInt = rand.nextInt(neighbours.size());
+        return neighbours.get(randInt);
     }
 }
 

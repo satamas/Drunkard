@@ -31,7 +31,7 @@ public class PointForGlass  extends ActiveObject{
     public void nextStep() {
         if(hasBeggar) {
             if(timer == 0) {
-                Field neighbour = field.getNeighbours().get(1);
+                Field neighbour = field.getSingleNeighbour();
                 if(neighbour.getObj() == null) {
                     hasBeggar = false;
                     Map.addActiveObject(new Beggar(neighbour));

@@ -21,7 +21,7 @@ public class Inn extends ActiveObject{
     @Override
     public void nextStep() {
         if(timer == 0) {
-            Field neighbour = field.getNeighbours().get(2);
+            Field neighbour = field.getSingleNeighbour();
             if(neighbour.getObj() == null) {
                 Map.addActiveObject(new Drunkard(neighbour));
             }

@@ -1,4 +1,5 @@
 package ru.spbau.mit.satamas.MapObjects;
+
 import ru.spbau.mit.satamas.Field;
 import ru.spbau.mit.satamas.Map;
 
@@ -19,17 +20,13 @@ public class Drunkard extends MovableObject{
 
     @Override
     public void nextStep(){
-		Random rand = new Random();
-		int randInt = rand.nextInt(5);
-        Field destination = null;
-        if(randInt<4){
-            destination = field.getNeighbours().get(randInt);
-        }
-		
-		if(destination != null){
+        Field destination = field.getRandomNeighbour();
+
+        if(destination != null){
 			MapObject object = destination.getObj();
 			if(object == null){
 				field.delObject();
+                Random rand = new Random();
 				int prob = rand.nextInt(30);
 				if ( prob < 1 && haveBottle == true){
 					new Bottle(field);
