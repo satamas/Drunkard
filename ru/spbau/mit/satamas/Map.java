@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-	private static int SIZE_X = 15;
+    private static int SIZE_X = 15;
     private static int REPR_SIZE_X = SIZE_X + 2;
     private static int SIZE_Y = 15;
     private static int REPR_SIZE_Y = SIZE_Y + 2;
@@ -30,8 +30,8 @@ public class Map {
         }
 
         Field[] map = new Field[SIZE_X * SIZE_Y];
-        for(int i=0; i < mapRepr.length; ++i){
-            for(int j =0; j <mapRepr[i].length; ++j){
+        for (int i = 0; i < mapRepr.length; ++i) {
+            for (int j = 0; j < mapRepr[i].length; ++j) {
                 mapRepr[i][j] = ' ';
             }
         }
@@ -90,8 +90,6 @@ public class Map {
             map[9 + SIZE_X * 0].setNeighbour(innField, 1);
             activeObjects.add(new Inn(innField));
 
-
-            entryPoint = pointForGlassField;
         } else {
             Field pointForGlassField = new Field(NO_OF_NEIGHBOURS);
             pointForGlassField.setNeighbour(map[0 + SIZE_X * 4], 3);
@@ -109,9 +107,8 @@ public class Map {
             innField.setNeighbour(map[9 + SIZE_X * 0], 4);
             map[9 + SIZE_X * 0].setNeighbour(innField, 1);
             activeObjects.add(new Inn(innField));
-            entryPoint = pointForGlassField;
         }
-
+        entryPoint = map[0];
 
     }
 
@@ -191,7 +188,11 @@ public class Map {
     }
 
     public static void print() {
-        updateRepr(entryPoint, 0, 5, new boolean[size()]);
+        if(type.equals(MapType.Normal)) {
+            updateRepr(entryPoint, 1, 1, new boolean[size()]);
+        } else{
+            updateRepr(entryPoint, 2, 1, new boolean[size()]);
+        }
         for (int j = 0; j < REPR_SIZE_Y; ++j) {
             for (int i = 0; i < REPR_SIZE_X; ++i) {
                 System.out.print(mapRepr[i][j]);
@@ -212,5 +213,7 @@ public class Map {
         Normal,
         Hexagonal
     }
+
+
 
 }

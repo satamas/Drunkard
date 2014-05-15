@@ -20,6 +20,12 @@ public class PoliceStation extends ActiveObject {
         return 'S';
     }
 
+    public void getInto(Policeman p){
+        Map.killObj(p);
+        p.field.delObject();
+        hasPoliceman = true;
+    }
+
     @Override
     public void nextStep() {
         if(hasPoliceman) {

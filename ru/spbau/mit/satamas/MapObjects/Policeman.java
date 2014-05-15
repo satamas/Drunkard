@@ -40,9 +40,7 @@ public class Policeman extends MovableObject {
             if (step.getObj() == null) {
                 moveTo(step);
             } else if (step.getObj() instanceof PoliceStation) {
-                ((PoliceStation) step.getObj()).hasPoliceman = true;
-                Map.killObj(this);
-                field.delObject();
+                ((PoliceStation) step.getObj()).getInto(this);
             }
         }
     }

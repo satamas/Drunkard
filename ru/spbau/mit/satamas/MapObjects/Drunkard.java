@@ -7,8 +7,10 @@ import java.util.Random;
 
 
 public class Drunkard extends MovableObject{
-	Boolean haveBottle = true;
-	
+    private static final int DROP_BOTTLE_PROBABILITY = 30;
+	private Boolean haveBottle = true;
+	Random rand = new Random();
+
 	public Drunkard(Field field){
         super(field);
 	}
@@ -26,8 +28,7 @@ public class Drunkard extends MovableObject{
 			MapObject object = destination.getObj();
 			if(object == null){
 				field.delObject();
-                Random rand = new Random();
-				int prob = rand.nextInt(30);
+				int prob = rand.nextInt(DROP_BOTTLE_PROBABILITY);
 				if ( prob < 1 && haveBottle == true){
 					new Bottle(field);
 					haveBottle = false;
